@@ -41,6 +41,7 @@ class MoveEmploController extends Controller
      */
     public function store(Request $request)
     {
+        //return response($request->all());
         $this->validate($request, [
     		'movement_id' => 'required',
     		'employee_id' => 'required',
@@ -53,11 +54,9 @@ class MoveEmploController extends Controller
     	$emplo->description = $request->description;
     	$emplo->save();
         if ($emplo) {
-            return [
-                "result" => "Movement recorded done "
-            ];
+            return  response(["result" => "Movement recorded done "]);
         }else {
-            return ["result" => "operation failed "];
+            return response(["result" => "operation failed"]);
         }
     }
 

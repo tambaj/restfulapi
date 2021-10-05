@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
@@ -22,8 +22,11 @@ use App\Http\Controllers\MoveEmploController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 
-    Route::get('/movements', [MovementController::class, 'index'])->middleware('auth');
+
 });
+Route::get('/movements',);
+// login
+Route::post('/login', 'LoginController@login');
 
 Route::get('/posts', [PostsApiController::class, 'index']);
 Route::post('/posts', [PostsApiController::class, 'store']);
@@ -36,13 +39,14 @@ Route::delete('/posts/{post}', [PostsApiController::class, 'destroy']);
     Route::put('/employees/{id}', [EmployeeController::class, 'update']);
     Route::delete('/employees/{id}', [EmployeeController::class, 'destroy']);
 
-    Route::get('/movements', [MovementController::class, 'index'])->middleware('auth');
+    Route::get('/movements', [MovementController::class, 'index']);
+    Route::get('/movements/{id}', [MovementController::class, 'edit']);
     Route::post('/movements', [MovementController::class, 'store']);
     Route::put('/movements/{id}', [MovementController::class, 'update']);
     Route::delete('/movements/{movement}', [MovementController::class, 'destroy']);
 
     Route::get('/movemplos', [MoveEmploController::class, 'index']);
-    Route::post('/movemplos', [MoveEmploController::class, 'store']);
+    Route::post('/movemplos', 'MoveEmploController@store');
     Route::put('/movemplos/{id}', [MoveEmploController::class, 'update']);
     Route::delete('/movemplos/{id}', [MoveEmploController::class, 'destroy']);
 

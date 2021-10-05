@@ -69,7 +69,7 @@ class MovementController extends Controller
      */
     public function edit($id)
     {
-        //
+        return Movement::find($id);
     }
 
     /**
@@ -79,16 +79,17 @@ class MovementController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
         $this->validate($request, [
     		'movement_type' => 'required'
     	]);
-    	$momvement = Movement::find($id);
-    	$momvement->save();
-        if ($momvement) {
+    	$mvt = Movement::find($id);
+    	$mvt->movement_type = $request->movement_type;
+    	$mvt->save();
+        if ($mvt) {
             return [
-                "result" => "movement updted done "
+                "result" => "Movement type updted done "
             ];
         }else {
             return ["result" => "operation failed "];
